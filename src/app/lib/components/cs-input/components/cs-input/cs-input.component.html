@@ -1,0 +1,61 @@
+<ng-container *ngIf="labelStyle === ''">
+  <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+</ng-container>
+
+<div
+  class="cs-input"
+  [attr.invalid]="invalid"
+  [attr.valid]="valid"
+  [attr.filled]="!!value"
+  [ngClass]="{
+    'cs-input--material': inputStyle === 'material',
+    'cs-input--material-outline': inputStyle === 'material-outline'
+  }"
+>
+  <span class="cs-input__content cs-input__content--left">
+    <ng-content select="[leftContent]"></ng-content>
+  </span>
+
+  <input
+    class="cs-input__element"
+    #input
+    [type]="type"
+    [value]="value"
+    [disabled]="disable"
+    [placeholder]="placeholder"
+    (input)="onInput($event)"
+    (keydown)="onKeyDown($event)"
+  />
+
+  <span class="cs-input__content cs-input__content--right">
+    <ng-content select="[rightContent]"></ng-content>
+  </span>
+</div>
+
+<ng-container *ngIf="labelStyle === 'floating' || labelStyle === 'fixed'">
+  <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+</ng-container>
+
+<ng-template #labelTemplate>
+  <label
+    (click)="labelStyle === 'floating' ? input.focus() : null"
+    class="label"
+    [ngClass]="{
+      'label--fixed': labelStyle === 'fixed',
+      'label--floating': labelStyle === 'floating'
+    }"
+    *ngIf="label"
+  >
+    {{ label }}
+  </label>
+</ng-template>
+
+<div class="cs-input-bar" *ngIf="inputStyle === 'material'">
+  <div class="cs-input-bar__highlight"></div>
+</div>
+
+<small class="error-message" *ngIf="invalid && errors.length">
+  {{
+    customMessages[errors[0]] || (errors[0] | inputErrorMessage : controlErrors)
+  }}
+</small>

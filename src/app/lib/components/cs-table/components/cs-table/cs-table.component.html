@@ -1,0 +1,157 @@
+<table summary="reusable">
+  <thead
+    class="tableHead"
+    [ngClass]="{ stickyHead: stickyHead }"
+    [hidden]="tableConfig.hideHeader"
+  >
+    <tr>
+      <th
+        scope="col"
+        *ngFor="let col of tableConfig.colDefs"
+        [ngStyle]="col.headerStyle"
+      >
+        <ng-template #withoutHeaderTemplate>
+          {{ col.displayName }}
+        </ng-template>
+
+        <ng-template #withHeaderTemplate>
+          <ng-container *ngFor="let template of colTemplates">
+            <ng-container [ngSwitch]="template.templateName">
+              <ng-container *ngSwitchCase="col.headerTemplateName">
+                <ng-container
+                  *ngTemplateOutlet="
+                    template.template;
+                    context: { $implicit: col }
+                  "
+                ></ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-template>
+
+        <ng-container
+          *ngTemplateOutlet="
+            col.headerTemplateName ? withHeaderTemplate : withoutHeaderTemplate
+          "
+        ></ng-container>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="!loading">
+      <tr *ngIf="!value.length">
+        <td *ngIf="!emptyTemplate">No data.</td>
+        <ng-container *ngIf="emptyTemplate">
+          <ng-container *ngTemplateOutlet="emptyTemplate"></ng-container>
+        </ng-container>
+      </tr>
+      <tr
+        [ngClass]="{ 'row-hover row-pointer': !tableConfig.hideRowPointer }"
+        *ngFor="let row of value; let i = index"
+      >
+        <td
+          *ngFor="let col of tableConfig.colDefs"
+          (click)="rowClick(row, col)"
+          [ngStyle]="col.columnStyle"
+        >
+          <ng-template #withoutCellTemplate>
+            {{
+              ((col.name
+                | csTableObjectPath : row
+                | csTableFormatColumn : col) &&
+                (col.name
+                  | csTableObjectPath : row
+                  | csTableFormatColumn : col)) ||
+              (col.name
+                | csTableObjectPath : row
+                | csTableFormatColumn : col) === 0
+                ? (col.name
+                  | csTableObjectPath : row
+                  | csTableFormatColumn : col)
+                : "No " + col.displayName
+            }}
+          </ng-template>
+
+          <ng-template #withCellTemplate>
+            <ng-container *ngFor="let template of colTemplates">
+              <ng-container [ngSwitch]="template.templateName">
+                <ng-container *ngSwitchCase="col.columnTemplateName">
+                  <ng-container
+                    *ngTemplateOutlet="
+                      template.template;
+                      context: {
+                        $implicit: { row: this.row, col: this.col, i }
+                      }
+                    "
+                  ></ng-container>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-template>
+
+          <ng-container
+            *ngTemplateOutlet="
+              col.columnTemplateName ? withCellTemplate : withoutCellTemplate
+            "
+          ></ng-container>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf="loading">
+      <tr *ngFor="let row of [].constructor(loadingRowsNumber || 10)">
+        <td *ngFor="let col of tableConfig.colDefs" [ngStyle]="col.columnStyle">
+          <div
+            [ngStyle]="{ height: skeletonHeight || '19px' }"
+            class="skeleton"
+          ></div>
+        </td>
+      </tr>
+      <tr *ngIf="value.length" class="skeleton-row">
+        <td *ngFor="let col of tableConfig.colDefs" [ngStyle]="col.columnStyle">
+          <ng-template #withoutCellTemplate>
+            {{
+              ((col.name | csTableObjectPath : value[0]) &&
+                (col.name | csTableObjectPath : value[0])) ||
+              (col.name | csTableObjectPath : value[0]) === 0
+                ? (col.name | csTableObjectPath : value[0])
+                : "No " + col.displayName
+            }}
+          </ng-template>
+
+          <ng-template #withCellTemplate>
+            <ng-container *ngFor="let template of colTemplates">
+              <ng-container [ngSwitch]="template.templateName">
+                <ng-container *ngSwitchCase="col.columnTemplateName">
+                  <ng-container
+                    *ngTemplateOutlet="
+                      template.template;
+                      context: {
+                        $implicit: { row: this.value[0], col: this.col }
+                      }
+                    "
+                  ></ng-container>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-template>
+
+          <ng-container
+            *ngTemplateOutlet="
+              col.columnTemplateName ? withCellTemplate : withoutCellTemplate
+            "
+          ></ng-container>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+
+<cs-table-pagination
+  *ngIf="tableConfig.pagination && !loading && value.length"
+  (pageChange)="setPage($event)"
+  [currentPage]="currentPage"
+  [results]="results"
+  [lastPage]="lastPage"
+  [pageSize]="pageSize"
+  [totalResults]="totalResults"
+></cs-table-pagination>

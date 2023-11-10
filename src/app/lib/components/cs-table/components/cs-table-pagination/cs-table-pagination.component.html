@@ -1,0 +1,25 @@
+<div class="pagination-container" style="margin-top: 20px">
+  <div>
+    Showing {{ pageSize * (currentPage - 1) + 1 }} to
+    {{ currentPage === lastPage ? totalResults : pageSize * currentPage }} of {{ totalResults }}
+  </div>
+  <div class="pagination-button" (click)="changePage(1)">
+    <div class="chevron bx bx-chevrons-left"></div>
+  </div>
+  <div class="pagination-button" (click)="pagination('previous')">
+    <div class="chevron bx bx-chevron-left"></div>
+  </div>
+  <div
+    (click)="changePage(page)"
+    class="pagination-button"
+    [ngClass]="{ 'pagination-button--selected': currentPage === page }"
+    *ngFor="let page of pagesArray">
+    {{ page }}
+  </div>
+  <div class="pagination-button" (click)="pagination('next')">
+    <div class="chevron bx bx-chevron-right"></div>
+  </div>
+  <div class="pagination-button" (click)="changePage(lastPage)">
+    <div class="chevron bx bx-chevrons-right"></div>
+  </div>
+</div>

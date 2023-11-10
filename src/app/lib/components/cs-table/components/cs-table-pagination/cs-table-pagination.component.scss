@@ -1,0 +1,33 @@
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.pagination-container-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.pagination-button {
+  height: 42px;
+  width: 42px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background-color: #e9ecef;
+  }
+  &--selected {
+    background-color: #eff6ff;
+    color: var(--imagine-primary-color);
+  }
+}
+
+.chevron {
+  font-size: 20px;
+}

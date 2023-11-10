@@ -1,0 +1,15 @@
+<div class="alert-container">
+  <div
+    [class]="
+      'alert ' +
+      alertController.animationAlert +
+      ' alert--' +
+      alertController.alertInfo.color
+    "
+  >
+    <div class="alert__content">
+      <div class="spinner"></div>
+      <div class="alert__title">{{ alertController.alertInfo.title }}</div>
+    </div>
+  </div>
+</div>

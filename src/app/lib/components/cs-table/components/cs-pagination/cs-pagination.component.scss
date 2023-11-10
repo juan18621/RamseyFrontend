@@ -1,0 +1,41 @@
+.cs-pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 1.6rem;
+}
+
+.cs-pagination-container-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cs-pagination-button {
+  height: 45px;
+  width: 48px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:not(.cs-pagination-button--selected) {
+    &:hover {
+      background-color: #e9e9e9;
+    }
+  }
+
+  &--selected {
+    background-color: var(--primary);
+    color: var(--white);
+  }
+}
+
+.chevron {
+  font-size: 14px;
+
+  &--big {
+    font-size: 24px;
+  }
+}

@@ -1,0 +1,27 @@
+<div class="cs-pagination-container">
+  <div *ngIf="showPaginationText">
+    Showing {{ pageSize * (currentPage - 1) + 1 }} to
+    {{ currentPage === lastPage ? totalResults : pageSize * currentPage }} of
+    {{ totalResults }}
+  </div>
+  <div class="cs-pagination-button" (click)="changePage(1)">
+    <div class="chevron--big csi-first_page"></div>
+  </div>
+  <div class="cs-pagination-button" (click)="pagination('previous')">
+    <div class="chevron csi-arrow-back"></div>
+  </div>
+  <div
+    (click)="changePage(page)"
+    class="cs-pagination-button"
+    [ngClass]="{ 'cs-pagination-button--selected': currentPage === page }"
+    *ngFor="let page of pagesArray"
+  >
+    {{ page }}
+  </div>
+  <div class="cs-pagination-button" (click)="pagination('next')">
+    <div class="chevron csi-arrow-forward"></div>
+  </div>
+  <div class="cs-pagination-button" (click)="changePage(lastPage)">
+    <div class="chevron--big csi-last_page"></div>
+  </div>
+</div>
