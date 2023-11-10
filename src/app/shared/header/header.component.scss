@@ -1,0 +1,62 @@
+@import '/src/sass/abstracts/mixins/respond';
+
+.header {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--primary);
+    backdrop-filter: blur(7.5px);
+    color: var(--white);
+
+
+
+    &__content {
+        min-height: 56px;
+        padding: 0.8rem 1.6rem;
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    &__logo {
+        display: none;
+        height: 65.601px;
+    }
+
+
+    @include respond(tab-port) {
+
+        &__content {
+            padding: 1.6rem 3.2rem;
+        }
+
+        &__text--desktop {
+            display: block;
+        }
+
+        &__right {
+            gap: 2rem;
+        }
+
+        &__logo {
+            display: block;
+        }
+
+    }
+
+    @include respond(desktop) {
+        &__content {
+            padding: 1.6rem 9rem;
+        }
+    }
+}

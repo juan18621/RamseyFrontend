@@ -1,0 +1,38 @@
+
+.product-card {
+    border-radius: 12px 12px 0px 0px;
+    border-radius: 12px;
+    border: 1px solid #F1EDE7;
+    background: var(--surface, #FFF);
+
+    &__img {
+        height: 194px;
+        width: 100%;
+        border-radius: inherit inherit 0 0;
+    }
+
+    &__body {
+        padding: 2.4rem;
+    }
+
+    &__title-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__price, &__title {
+        font-size: 2.4rem;
+    }
+
+    &__description {
+        font-size: 1.4rem;
+    }
+
+    @include respond(tab-port) {
+      
+
+        &__description {
+            font-size: 1.6rem;
+        }
+    }
+}

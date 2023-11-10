@@ -1,0 +1,80 @@
+.slider {
+    &__sections {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 1.6rem;
+    }
+
+    &__dots {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__dot {
+        border-radius: 4px;
+        width: 8px;
+        height: 8px;
+        background-color: var(--tertiary);
+
+        &--secondary {
+            background-color: var(--secondary);
+        }
+
+        &:first-child {
+            background-color: var(--primary);
+        }
+    }
+
+    &__buttons {
+        display: none;
+    }
+
+    @include respond(tab-port) {
+        margin-top: 2.4rem;
+    }
+
+    @include respond(desktop) {
+        margin-top: 3.2rem;
+        justify-content: space-between;
+
+        &__buttons {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+    }
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    height: auto !important;
+    position: initial !important;
+    color: var(--white) !important;
+    width: 44px !important;
+    height: 44px !important;
+    margin-top: 0 !important;
+    content: "" !important;
+
+    &::after {
+        display: none !important;
+    }
+}
+
+.swiper-button-prev {
+    background-color: var(--white);
+    color: var(--primary) !important;
+}
+
+.swiper-pagination-bullet {
+    border-radius: 4px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--secondary) !important;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--primary) !important;
+}

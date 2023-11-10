@@ -1,0 +1,10 @@
+@import '/src/sass/abstracts/mixins/respond';
+
+
+.students {
+    padding-top: 7.2rem;
+
+    @include respond(tab-port) {
+        padding-top: 10rem;
+    }
+}

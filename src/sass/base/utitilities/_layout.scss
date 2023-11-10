@@ -1,0 +1,55 @@
+.flex {
+    display: flex;
+}
+
+.justify-content {
+    &--center {
+        justify-content: center;
+    }
+
+    &--space-between {
+        justify-content: space-between;
+    }
+}
+
+.align-items {
+    &--center {
+        align-items: center;
+    }
+
+    &--end {
+        align-items: end;
+    }
+}
+
+.align-self {
+    &--center {
+        align-self: center;
+    }
+}
+
+.gap {
+    &--8 {
+        gap: .8rem;
+    }
+
+    &--16 {
+        gap: 1.6rem;
+    }
+
+    &--20 {
+        gap: 2rem;
+    }
+}
+
+.columns-2 {
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+@media screen and (min-width: 700px) {
+    .columns-2 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}

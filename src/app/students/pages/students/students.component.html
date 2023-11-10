@@ -1,0 +1,12 @@
+<div class="students">
+  <cs-table
+    [tableConfig]="tableConfig"
+    [dataSource]="students"
+    [loading]="loading"
+  >
+    <ng-template csCellTemplate="actions">
+      <div class="bx bx-edit pointer font-size--16"></div>
+      <div class="bx bx-trash pointer font-size--16 txt-danger"></div>
+    </ng-template>
+  </cs-table>
+</div>

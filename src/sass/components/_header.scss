@@ -1,0 +1,158 @@
+.header {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.50);
+    box-shadow: 0px 431px 172px 0px rgba(0, 0, 0, 0.01), 0px 673px 188px 0px rgba(0, 0, 0, 0.00);
+    backdrop-filter: blur(5px);
+
+    &--white {
+        background-color: white;
+        backdrop-filter: blur(7.5px);
+    }
+
+    &__left {
+        display: none;
+    }
+
+    &__btn {
+        background-color: transparent;
+        color: var(--primary);
+    }
+
+    &__content {
+        padding: 0.8rem 1.6rem;
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+
+
+    &__checkbox {
+        display: none;
+        border: 1px solid red;
+    }
+
+
+    &__navigation {
+        display: none;
+    }
+
+    &__menu {
+        font-size: 32px;
+        cursor: pointer;
+
+        &--x {
+            font-size: 20px;
+            display: none;
+        }
+    }
+
+    &__checkbox:checked ~ &__menu {
+        display: none;
+    }
+
+    &__checkbox:checked ~ &__menu--x {
+        display: block;
+    }
+
+    &__checkbox:checked ~ &__navigation {
+        display: block;
+        background-color: var(--white);
+        position: absolute;
+        top: calc(var(--scroll-padding) - 1px);
+        left: 0;
+        width: 100%;
+        padding: 16px 32px;
+        border-radius: 0px 0px 20px 20px;
+
+        li {
+            font-size: 16px;
+            display: block;
+
+            &:nth-child(1n+2) {
+                margin-top: 24px;
+            }
+
+            .active {
+                width: 100%;
+                display: block;
+                color: var(--primary);
+                border-bottom: 2px solid var(--primary);
+            }
+        }
+
+        &__menu {
+            display: none;
+
+            &--x {
+                display: block;
+            }
+        }
+    }
+
+    &__logo {
+        display: none;
+        height: 65.601px;
+    }
+
+    @include respond(tab-port) {
+
+        &__left {
+            display: block;
+        }
+
+        &__content {
+            padding: 1.6rem 3.2rem;
+        }
+
+        &__btn {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        &__menu {
+            display: none;
+        }
+
+        &__logo {
+            display: block;
+        }
+
+        &__navigation {
+            display: block;
+
+            ul {
+                display: flex;
+                list-style: none;
+                align-items: center;
+                font-size: 1.6rem;
+                gap: 3.2rem;
+
+                li {
+                    a {
+                        color: var(--primary);
+                        text-transform: capitalize;
+                    }
+
+                    .active {
+                        color: var(--secondary);
+                    }
+
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    @include respond(desktop) {
+        &__content {
+            padding: 1.6rem 9rem;
+        }
+    }
+}

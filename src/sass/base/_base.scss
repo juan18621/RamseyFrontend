@@ -1,0 +1,41 @@
+html,
+body {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding: var(--scroll-padding, 5rem)
+}
+
+body {
+  font-family: 'Poppins';
+  color: var(--primary);
+
+}
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--secondary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 5px;
+
+  @media only screen and (min-width: 1200px) {
+    width: 7px;
+  }
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 10px;
+}

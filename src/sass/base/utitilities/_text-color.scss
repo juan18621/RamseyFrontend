@@ -1,0 +1,27 @@
+.txt-primary {
+   color: var(--primary);
+}
+
+.txt-secondary {
+   color: var(--secondary);
+}
+
+.txt-tertiary {
+   color: var(--tertiary);
+}
+
+.txt-white {
+   color: var(--white);
+}
+
+.txt-danger {
+   color: var(--danger);
+}
+
+
+
+.font-weight {
+   &--600 {
+      font-weight: 600;
+   }
+}

@@ -1,0 +1,72 @@
+.about-card {
+    padding: 16px 24px;
+    border-radius: 0px 25px 25px 25px;
+    border: 1px solid var(--secondary-50);
+    background: var(--black-1);
+    box-shadow: 0px 16px 9px 0px rgba(191, 129, 28, 0.04), 0px 28px 11px 0px rgba(191, 129, 28, 0.01);
+    margin-top: 1.6rem;
+    min-width: 287px;
+
+    &--bottom {
+        display: none;
+    }
+
+    &__header {
+        display: flex;
+        align-items: start;
+        gap: 2.4rem;
+    }
+
+    &__title {
+        font-size: 1.6rem;
+    }
+
+    &__description {
+        margin-top: 0.8rem;
+        font-size: 1.4rem;
+        border-radius: 50px;
+        padding: 0.8rem 0.6rem;
+        border: 1px solid var(--tertiary);
+        color: var(--secondary);
+    }
+
+    &__summary {
+        color: var(--primary);
+        font-size: 1.4rem;
+        margin-top: 0.8rem;
+    }
+
+    @include respond(tab-port) {
+        min-width: 353px;
+        max-width: 35.3rem;
+        margin-top: 0%;
+
+        &__title {
+            font-size: 2.4rem;
+        }
+
+        &__summary {
+            margin-top: 2.4rem;
+        }
+
+        &--bottom {
+            display: block;
+            margin: 0 auto;
+        }
+
+        &--middle {
+            display: none;
+        }
+    }
+
+    @include respond(desktop) {
+        &--bottom {
+            display: none;
+        }
+
+        &--middle {
+            display: block;
+            align-self: center;
+        }
+    }
+}
