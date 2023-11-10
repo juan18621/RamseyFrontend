@@ -12,15 +12,15 @@
       >
         <ng-template csCellTemplate="actions" let-data>
           <div
-            class="bx bx-edit pointer font-size--16"
+            class="bx bx-edit pointer icon"
             (click)="openStudentForm(data.row)"
           ></div>
           <div
-            class="bx bx-trash pointer font-size--16 txt-danger"
+            class="bx bx-trash pointer icon txt-danger"
             (click)="deleteStudent(data.row)"
           ></div>
           <div
-            class="bx bx-user pointer font-size--16 txt-secondary"
+            class="bx bx-user pointer icon txt-secondary"
             [routerLink]="['detail', data.row.id]"
           ></div>
         </ng-template>

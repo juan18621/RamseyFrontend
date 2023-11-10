@@ -8,4 +8,13 @@
     @include respond(tab-port) {
         padding-top: 10rem;
     }
+
+    .icon {
+        font-size: 20px;
+
+        @include respond(desktop) {
+            font-size: 24px;
+        }
+
+    }
 }
