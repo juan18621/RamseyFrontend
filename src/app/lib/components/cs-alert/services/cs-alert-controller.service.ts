@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AlertInfo, ButtonAlert } from '../interfaces/cs-alert.interface';
+import {
+  AlertInfo,
+  ButtonAlert,
+} from '../components/cs-alert/cs-alert.component';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +10,7 @@ import { AlertInfo, ButtonAlert } from '../interfaces/cs-alert.interface';
 export class CsAlertController {
   showAlert = false;
   loading = false;
-  loadingAux = 0;
+  loadingAux = false;
 
   alertInfo: AlertInfo = {
     title: '',
@@ -29,13 +32,10 @@ export class CsAlertController {
     this.showAlert = true;
   }
 
-  startLoading(title: string) {
-    this.loading = true;
-    this.alertInfo.title = title;
-  }
-
-  startLoadingAux() {
-    this.loadingAux++;
+  startLoading() {
+    setTimeout(() => {
+      this.loading = true;
+    }, 0);
   }
 
   confirmAction(config: {
@@ -47,7 +47,6 @@ export class CsAlertController {
     cancelFunction?: any;
     iconName?: string;
     iconColor?: string;
-    preventHideAlertOnConfirm?: boolean;
   }) {
     this.openAlert({
       title: config.title || 'Confirm',
@@ -62,9 +61,7 @@ export class CsAlertController {
           buttonIcon: 'bx bx-check',
           buttonHandler: () => {
             config.confirmFunction();
-            if (!config.preventHideAlertOnConfirm) {
-              this.hideAlert();
-            }
+            this.hideAlert();
           },
         },
         {
@@ -86,9 +83,7 @@ export class CsAlertController {
    */
   hideAlert() {
     this.animationAlert = 'alertFadeOut';
-    setTimeout(() => {
-      this.showAlert = false;
-    }, 300);
+    this.showAlert = false;
   }
 
   /**
@@ -97,14 +92,9 @@ export class CsAlertController {
   stopLoading() {
     setTimeout(() => {
       this.loading = false;
-    }, 500);
+    }, 0);
   }
 
-  stopLoadingAux() {
-    setTimeout(() => {
-      this.loadingAux = this.loadingAux - 0.5;
-    }, 500);
-  }
   /**
    *Method that handles the success of a request with an alert
    */

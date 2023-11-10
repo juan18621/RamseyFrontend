@@ -19,9 +19,11 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
   &:hover {
     background-color: #e9ecef;
   }
+
   &--selected {
     background-color: #eff6ff;
     color: var(--imagine-primary-color);
@@ -30,4 +32,11 @@
 
 .chevron {
   font-size: 20px;
+}
+
+
+@media only screen and (max-width: 800px) {
+  .pagination-text {
+    display: none;
+  }
 }

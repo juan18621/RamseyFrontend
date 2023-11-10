@@ -30,15 +30,19 @@
 
 .gap {
     &--8 {
-        gap: .8rem;
+        gap: 8px;
+    }
+
+    &--10 {
+        gap: 10px;
     }
 
     &--16 {
-        gap: 1.6rem;
+        gap: 16px;
     }
 
     &--20 {
-        gap: 2rem;
+        gap: 20px;
     }
 }
 

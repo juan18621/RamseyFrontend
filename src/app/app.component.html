@@ -1,10 +1,10 @@
 <app-header></app-header>
 
-<div class="wrapper">
-  <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>
 
-<app-alert *ngIf="alertController.showAlert"></app-alert>
-<app-alert-loading
-  *ngIf="alertController.loading || alertController.loadingAux"
-></app-alert-loading>
+<cs-alert *ngIf="alertController.showAlert"></cs-alert>
+<cs-alert-loading *ngIf="alertController.loading"></cs-alert-loading>
+<cs-pop-up
+  *ngFor="let popUp of popUpController.popUps"
+  [popUpConfiguration]="popUp"
+></cs-pop-up>

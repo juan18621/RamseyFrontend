@@ -1,11 +1,16 @@
 @import '/src/sass/abstracts/mixins/respond';
 
-
-.students {
+.detail {
     padding-top: 7.2rem;
-    width: 100%;
+    height: 100%;
+    background-color: var(--secondary);
 
     @include respond(tab-port) {
         padding-top: 10rem;
     }
+}
+
+cs-skeleton-loading {
+    display: block;
+    margin-top: 20px;
 }

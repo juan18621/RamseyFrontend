@@ -9,3 +9,10 @@ import { CsAlertController } from '../../services/cs-alert-controller.service';
 export class CsAlertLoadingComponent {
   constructor(public alertController: CsAlertController) {}
 }
+
+export interface CustomMessage {
+  msg: string;
+  icon: string;
+  iconSlot: 'start' | 'end';
+  iconColor: string;
+}

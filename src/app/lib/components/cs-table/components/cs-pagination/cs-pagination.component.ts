@@ -15,7 +15,7 @@ export class CsPagination implements OnInit {
   @Input() currentPage = 1;
   @Input() lastPage = 1;
   @Input() pageSize = 0;
-  @Input() showPaginationText = false;
+  @Input() showPaginationText = true;
 
   pagesArray: any[] = [];
 

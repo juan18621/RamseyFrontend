@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AlertController } from './shared/components/alert/services/alert-controller.service';
+import { CsAlertController } from './lib/components/cs-alert/services/cs-alert-controller.service';
+import { CsPopUpController } from './lib/components/cs-pop-up/services/cs-pop-up-controller.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,8 @@ import { AlertController } from './shared/components/alert/services/alert-contro
 export class AppComponent {
   title = 'RamseyStudentsClient';
 
-  constructor(public alertController: AlertController) {}
+  constructor(
+    public alertController: CsAlertController,
+    public popUpController: CsPopUpController
+  ) {}
 }

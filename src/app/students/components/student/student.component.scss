@@ -1,0 +1,28 @@
+header,
+footer {
+    padding: 0 20px;
+}
+
+header {
+    padding-top: 20px;
+}
+
+footer {
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: end;
+}
+
+.student {
+    padding: 0 20px;
+    padding-bottom: 0;
+    height: 70%;
+
+    overflow: auto;
+
+}
+
+cs-input {
+    display: block;
+    margin-top: 20px;
+}

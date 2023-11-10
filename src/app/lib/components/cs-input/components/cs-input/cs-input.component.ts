@@ -49,6 +49,8 @@ export class CsInputComponent
 
   @Input() disable = false;
 
+  @Input() readonly = false;
+
   @Input() formControlName = '';
 
   @Input() formControl?: FormControl;

@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { EMPTY, Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { AlertController } from '../components/alert/services/alert-controller.service';
+import { CsAlertController } from 'src/app/lib/components/cs-alert/services/cs-alert-controller.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +23,7 @@ export class TokenInterceptorService implements HttpInterceptor {
    */
   constructor(
     private router: Router,
-    private alertController: AlertController
+    private alertController: CsAlertController
   ) {}
 
   /**use this method in case you want to manange the alerts from the component not from here */
@@ -49,7 +49,7 @@ export class TokenInterceptorService implements HttpInterceptor {
     } else {
       headers = req.headers;
     }
-    req.url.includes('/api/files/') && this.alertController.startLoadingAux();
+
     this.alertController.startLoading();
     //clones the request
     const reqClone = req.clone({
@@ -61,8 +61,6 @@ export class TokenInterceptorService implements HttpInterceptor {
       //handles the errors
       catchError(this.handleError.bind(this)),
       map((resp) => {
-        req.url.includes('/api/files/') &&
-          this.alertController.stopLoadingAux();
         this.alertController.stopLoading();
         return resp;
       })
@@ -86,35 +84,10 @@ export class TokenInterceptorService implements HttpInterceptor {
       return throwError(() => error);
     } else {
       this.alertController.handleError({
-        title: error.error.msg,
-        msg: this.buildErrorMessage(error),
+        title: 'Status: ' + error.error.responseCode,
+        msg: error.error.responseMessage,
       });
       return EMPTY;
-    }
-  }
-
-  /**
-   * build error message
-   */
-  buildErrorMessage(error: any): string {
-    const defaultMessage = 'Something went wrong, please try again';
-    if (error.error) {
-      if (error.error.error) {
-        return error.error.error;
-      }
-      if (error.error.info) {
-        return error.error.info;
-      }
-      if (error.error) {
-        return error.error;
-      }
-      return defaultMessage;
-    } else {
-      if (error.statusText) {
-        return error.statusText;
-      } else {
-        return defaultMessage;
-      }
     }
   }
   /**

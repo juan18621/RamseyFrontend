@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptorService } from './shared/interceptors/token-interceptor.service';
-import { AlertModule } from './shared/components/alert/alert.module';
+import { CsAlertModule } from './lib/components/cs-alert/cs-alert.module';
+import { CsPopUpModule } from './lib/components/cs-pop-up/cs-pop-up.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +16,8 @@ import { AlertModule } from './shared/components/alert/alert.module';
     AppRoutingModule,
     HeaderComponent,
     HttpClientModule,
-    AlertModule,
+    CsAlertModule,
+    CsPopUpModule,
   ],
   providers: [
     {

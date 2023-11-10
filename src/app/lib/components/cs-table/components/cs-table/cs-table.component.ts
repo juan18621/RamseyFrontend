@@ -60,7 +60,7 @@ export class CsTableComponent implements AfterViewInit {
 
   /** pagination data */
   @Input() results = 0;
-  @Input() pageSize = 10;
+  @Input() pageSize = 5;
   @Input() totalResults = 0;
   @Input() currentPage = 1;
   @Input() lastPage = 0;

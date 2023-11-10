@@ -6,14 +6,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./cs-table-pagination.component.scss'],
 })
 export class CsTablePaginationComponent implements OnInit {
-  /**tells the parent whe page change */
   @Output() pageChange = new EventEmitter();
-  /** pagination data */
-  @Input() results = 0;
+
   @Input() totalResults = 0;
   @Input() currentPage = 1;
   @Input() lastPage = 1;
   @Input() pageSize = 0;
+  @Input() showPaginationText = true;
 
   pagesArray: any[] = [];
 
@@ -22,23 +21,40 @@ export class CsTablePaginationComponent implements OnInit {
   }
 
   setPages() {
-    let initialVisiblePage = 0;
+    const pageCount = Math.ceil(this.totalResults / this.pageSize);
 
-    if (this.currentPage > 2) {
-      if (this.currentPage === this.lastPage) {
-        initialVisiblePage = this.currentPage - 5;
-      } else if (this.currentPage === this.lastPage - 1) {
-        initialVisiblePage = this.currentPage - 4;
-      } else {
-        initialVisiblePage = this.currentPage - 3;
-      }
+    this.lastPage = pageCount;
+
+    this.pagesArray = Array.from({ length: pageCount }, (_, i) => i + 1).slice(
+      0,
+      pageCount
+    );
+
+    this.pagesArray = this.getRange(this.pagesArray, this.currentPage);
+  }
+
+  getRange(arr: any[], currentPage: number, count = 5) {
+    if (arr.length <= 5)
+      return Array.from(Array(arr.length).keys()).map((r) => {
+        return r + 1;
+      });
+    let diff = 0;
+    const result = [
+      currentPage - 2,
+      currentPage - 1,
+      currentPage,
+      currentPage + 1,
+      currentPage + 2,
+    ];
+    if (result[0] < 3) {
+      diff = 1 - result[0];
     }
-
-    const lastVisiblePage = this.currentPage <= 2 ? 5 : this.currentPage + 2;
-    this.pagesArray = Array.from(
-      { length: this.lastPage },
-      (_, i) => i + 1
-    ).slice(initialVisiblePage, lastVisiblePage);
+    if ((result.slice(-1) as any) > arr.length - 2) {
+      diff = arr.length - (result.slice(-1) as any);
+    }
+    return result.map((r) => {
+      return r + diff;
+    });
   }
 
   /**

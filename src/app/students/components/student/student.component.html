@@ -1,0 +1,44 @@
+<header class="flex align-items--center justify-content--space-between">
+  <h1 *ngIf="fromDetail">Student Detail</h1>
+  <h2 *ngIf="!fromDetail">{{ student ? "Edit" : "Create" }} Student</h2>
+  <span
+    *ngIf="!fromDetail"
+    (click)="close()"
+    class="bx bx-x font-size--16 pointer"
+  ></span>
+</header>
+<div class="student">
+  <form [formGroup]="studentForm">
+    <cs-input
+      label="Username"
+      labelStyle="fixed"
+      formControlName="username"
+    ></cs-input>
+    <cs-input
+      label="First Name"
+      labelStyle="fixed"
+      formControlName="firstName"
+    ></cs-input>
+    <cs-input
+      label="Last Name"
+      labelStyle="fixed"
+      formControlName="lastName"
+    ></cs-input>
+    <cs-input label="Age" labelStyle="fixed" formControlName="age"></cs-input>
+    <cs-input
+      label="Career"
+      labelStyle="fixed"
+      formControlName="career"
+    ></cs-input>
+  </form>
+</div>
+<footer class="margin-top--10 flex gap--10">
+  <button *ngIf="!fromDetail" (click)="close()" class="btn btn--outline">
+    Cancel
+  </button>
+  <button *ngIf="!fromDetail" (click)="submit()" class="btn">Confirm</button>
+  <button *ngIf="fromDetail" routerLink="/" class="btn btn--outline">
+    Go Back
+  </button>
+  <button *ngIf="fromDetail" (click)="submit()" class="btn">Update</button>
+</footer>

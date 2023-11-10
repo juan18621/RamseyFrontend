@@ -3,6 +3,9 @@ import { Subscription } from 'rxjs';
 import { StudentsService } from '../../services/students.service';
 import { Student } from '../../interfaces/student.interface';
 import { CsTableConfig } from 'src/app/lib/components/cs-table/interfaces/cs-table.interface';
+import { CsAlertController } from 'src/app/lib/components/cs-alert/services/cs-alert-controller.service';
+import { CsPopUpController } from 'src/app/lib/components/cs-pop-up/services/cs-pop-up-controller.service';
+import { StudentComponent } from '../../components/student/student.component';
 
 @Component({
   selector: 'app-students',
@@ -18,6 +21,7 @@ export class StudentsComponent implements OnInit {
 
   tableConfig: CsTableConfig = {
     hideRowPointer: true,
+    pagination: true,
     colDefs: [
       {
         name: 'actions',
@@ -33,7 +37,11 @@ export class StudentsComponent implements OnInit {
     ],
   };
 
-  constructor(private studentService: StudentsService) {}
+  constructor(
+    private studentService: StudentsService,
+    private alertController: CsAlertController,
+    private popUpController: CsPopUpController
+  ) {}
 
   ngOnInit(): void {
     this.getStudents();
@@ -44,6 +52,40 @@ export class StudentsComponent implements OnInit {
     this.studentService.getStudents().subscribe((resp: any) => {
       this.loading = false;
       this.students = resp;
+    });
+  }
+
+  deleteStudent(student: Student) {
+    this.alertController.confirmAction({
+      confirmFunction: () => {
+        this.loading = true;
+        this.studentService.deleteStudent(student.id!).subscribe(() => {
+          this.loading = false;
+          this.getStudents();
+        });
+      },
+    });
+  }
+
+  async openStudentForm(student?: Student) {
+    const popUp = await this.popUpController.openPopUp({
+      component: StudentComponent,
+      styles: {
+        maxHeight: '450px',
+        maxWidth: '450px',
+      },
+      componentProps: {
+        student,
+      },
+    });
+
+    popUp.popUpClosed().then((data) => {
+      if (data) {
+        this.alertController.handleSuccess({
+          msg: `Student ${data.created ? 'created' : 'updated'}`,
+        });
+        this.getStudents();
+      }
     });
   }
 }

@@ -1,12 +1,30 @@
 <div class="students">
-  <cs-table
-    [tableConfig]="tableConfig"
-    [dataSource]="students"
-    [loading]="loading"
-  >
-    <ng-template csCellTemplate="actions">
-      <div class="bx bx-edit pointer font-size--16"></div>
-      <div class="bx bx-trash pointer font-size--16 txt-danger"></div>
-    </ng-template>
-  </cs-table>
+  <div class="wrapper">
+    <button class="btn" (click)="openStudentForm()">
+      <span class="bx bx-plus"></span>
+      Create Student
+    </button>
+    <div class="margin-top--20">
+      <cs-table
+        [tableConfig]="tableConfig"
+        [dataSource]="students"
+        [loading]="loading"
+      >
+        <ng-template csCellTemplate="actions" let-data>
+          <div
+            class="bx bx-edit pointer font-size--16"
+            (click)="openStudentForm(data.row)"
+          ></div>
+          <div
+            class="bx bx-trash pointer font-size--16 txt-danger"
+            (click)="deleteStudent(data.row)"
+          ></div>
+          <div
+            class="bx bx-user pointer font-size--16 txt-secondary"
+            [routerLink]="['detail', data.row.id]"
+          ></div>
+        </ng-template>
+      </cs-table>
+    </div>
+  </div>
 </div>

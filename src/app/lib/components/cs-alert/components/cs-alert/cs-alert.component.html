@@ -11,7 +11,7 @@
       <div class="icon" *ngIf="alertController.alertInfo.showIcon">
         <em [class]="alertController.alertInfo.iconName"></em>
       </div>
-      <div class="title">{{ alertController.alertInfo.title | titlecase }}</div>
+      <div class="title">{{ alertController.alertInfo.title }}</div>
       <div
         class="description"
         [innerHTML]="alertController.alertInfo.msg"
